@@ -49,11 +49,22 @@ int main () {
     }
     for(int i = 0; i < 38; i++){
         x = rand() % 16;
-
         y = rand() % 16;
-        
+
         mapa[x][y] = 1;
+        //1 = graveto
     }
+    for (int i = 0; i < 16; i++){
+        for (int l = 0; l < 16; l++){
+            if (mapa[i][l] == 1){
+                cout << "G";
+            }
+             else{
+                cout << ".";
+             }
+        }
+    }
+
 
 }
 
