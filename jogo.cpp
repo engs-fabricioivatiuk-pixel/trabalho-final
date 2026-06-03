@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
 #include <random> 
 using namespace std;
@@ -24,6 +23,60 @@ int main () {
         for(int l = 0; l < 16; l++){
             mapa[i][l] = 0;
         }
+        for(int i = 0; i < 38; i++){
+        x = rand() % 16;
+        y = rand() % 16;
+
+        mapa[x][y] = 1;
+    }
+    for (int i = 0; i < 38; i++){
+        for (int l = 0; l < 38; l++){
+            if (mapa[i][l] == 1){
+                cout << "G";
+            }
+             else{
+                cout << ".";
+             }
+        }
+    }
+    for (int i = 0; i < 38; i++){
+        for (int l = 0; l < 38; l++){
+            if (mapa[i][l] == 2){
+                cout << "P";
+            }
+             else{
+                cout << ".";
+             }
+        }
+    }for (int i = 0; i < 26; i++){
+        for (int l = 0; l < 26; l++){
+            if (mapa[i][l] == 3){
+                cout << "F";
+            }
+             else{
+                cout << ".";
+             }
+        }
+    }
+    for (int i = 0; i < 26; i++){
+        for (int l = 0; l < 26; l++){
+            if (mapa[i][l] == 4){
+                cout << "A";
+            }
+             else{
+                cout << ".";
+             }
+        }
+    }
+    for (int i = 0; i < 38; i++){
+        for (int l = 0; l < 38; l++){
+            if (mapa[i][l] == 5){
+                cout << "c";
+            }
+             else{
+                cout << ".";
+             }
+        }
     }
 
     cout << "qual o seu objetivo ?";
@@ -47,24 +100,5 @@ int main () {
         metaarvores = 4;
      cout << "3- coletar 8 pedras e 4 arvores" << endl;
     }
-    for(int i = 0; i < 38; i++){
-        x = rand() % 16;
-        y = rand() % 16;
-
-        mapa[x][y] = 1;
-        //1 = graveto
-    }
-    for (int i = 0; i < 16; i++){
-        for (int l = 0; l < 16; l++){
-            if (mapa[i][l] == 1){
-                cout << "G";
-            }
-             else{
-                cout << ".";
-             }
-        }
-    }
-
-
 }
 
