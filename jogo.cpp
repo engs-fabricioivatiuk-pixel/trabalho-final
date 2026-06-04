@@ -4,9 +4,9 @@
 using namespace std;
 
 int main () {
-    int mapa[16][16], posicaoColuna = 0, posicaoLinha = 0, inventario[5] = {0};
+    char mapa[16][16], posicaoColuna = 0, posicaoLinha = 0, inventario[5] = {0};
     int x, y;
-    int xjogador = 0, yjogador = 0;
+    int xJogador = 0, yJogador = 0;
 
     int gravetos = 0;
     int pedras = 0;
@@ -22,7 +22,6 @@ int main () {
     int objetivo;
     
     srand(time(0));
-    
     for(int i = 0; i < 16; i++){
         for(int l = 0; l < 16; l++){
             mapa[i][l] = 0;
@@ -91,19 +90,19 @@ int main () {
     for (int i = 0; i < 16; i++){
         for (int l = 0; l < 16; l++){
             if (mapa[i][l] == 1){
-                cout << " G ";
+                cout << " g ";
             }
             else if (mapa[i][l]==2){
-                cout << " P ";
+                cout << " p ";
             }
             else if (mapa[i][l]==3){
-                cout << " F ";
+                cout << " f ";
             }
             else if (mapa[i][l]==4){
-                cout << " A ";
+                cout << " a ";
             }
              else if (mapa[i][l]==5) {
-                cout << " T ";
+                cout << " t ";
              }
               else if (mapa[i][l]==6) {
                 cout << " # ";
@@ -114,7 +113,6 @@ int main () {
         }
         cout << endl;
     }
-    mapa[xjogador][yjogador] = 0;
     
     cout << "\nqual o seu objetivo ?" << endl;
     cout <<" 1- Coletar 4 gravetos e 2 pedras" << endl;
@@ -148,5 +146,89 @@ int main () {
     cout << "Arvores: " << arvores << endl;
     
     mapa[0][0] = '.';
+    mapa[xJogador][yJogador] = 'J'; 
+
+    char movimento;
+    char coletar;
     
+    mapa[xJogador][yJogador] = 'J'; 
+
+    while (gravetos < metagravetos || pedras < metapedras || frutas < metafrutas || animais < metaanimais || arvores < metaarvores) {
+        
+        cout << "\nINVENTARIO: " << endl;
+        cout << "Graveto: " << gravetos << " | Pedras: " << pedras << " | Frutas: " << frutas << " | Animais: " << animais << " | Arvores: " << arvores << endl;
+        cout << "--------------------------------------------------\n";
+        for (int i = 0; i < 16; i++){
+            for (int l = 0; l < 16; l++){
+                if (mapa[i][l] == 'J') { 
+                    cout << " J ";
+                }
+                else if (mapa[i][l] == 1){
+                    cout << " g ";
+                }
+                else if (mapa[i][l]==2){
+                    cout << " p ";
+                }
+                else if (mapa[i][l]==3){
+                    cout << " f ";
+                }
+                else if (mapa[i][l]==4){
+                    cout << " a ";
+                }
+                 else if (mapa[i][l]==5) {
+                    cout << " t ";
+                 }
+                  else if (mapa[i][l]==6) {
+                    cout << " # ";
+                  }
+                 else {
+                    cout << " . ";
+                 }
+            }
+            cout << endl;
+        }
+
+        cout << "\nPara onde quer ir? (w: cima, s: baixo, a: esquerda, d: direita): ";
+        cin >> movimento;
+        
+
+
+        int proximoX = xJogador;
+        int proximoY = yJogador;
+
+
+        if (movimento == 'w' || movimento == 'W') proximoX--;
+        if (movimento == 's' || movimento == 'S') proximoX++;
+        if (movimento == 'a' || movimento == 'A') proximoY--;
+        if (movimento == 'd' || movimento == 'D') proximoY++;
+
+        if (proximoX >= 0 && proximoX < 16 && proximoY >= 0 && proximoY < 16) {
+            
+
+            if (mapa[proximoX][proximoY] == 6) {
+                cout << "\nObstaculo! nao pode ultrapassar" << endl;
+
+            } 
+            else {
+                mapa[xJogador][yJogador] = 0; 
+
+                xJogador = proximoX;
+                yJogador = proximoY;
+
+                if (mapa[xJogador][yJogador] == 1) gravetos++;
+                if (mapa[xJogador][yJogador] == 2) pedras++;
+                if (mapa[xJogador][yJogador] == 3) frutas++;
+                if (mapa[xJogador][yJogador] == 4) animais++;
+                if (mapa[xJogador][yJogador] == 5) arvores++;
+
+                mapa[xJogador][yJogador] = 'J';
+            }
+        } else {
+            cout << "\nVoce bateu nas bordas do mapa!" << endl;
+        }
+    } 
+
+    cout << "\nParabens! Voce atingiu todos os seus objetivos e venceu o jogo!" << endl;
+    return 0;
 }
+
