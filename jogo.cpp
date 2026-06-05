@@ -1,6 +1,8 @@
 #include <iostream>
 #include <ctime>
 #include <random> 
+#include <string>
+
 using namespace std;
 
 int main () {
@@ -27,6 +29,7 @@ int main () {
             mapa[i][l] = 0;
         }
     } 
+
     for(int b = 0; b < 38; b++){
         x = rand() % 16;
         y = rand() % 16;
@@ -37,7 +40,8 @@ int main () {
             b--;
         }
     }
-     for(int b = 0; b < 38; b++){
+
+    for(int b = 0; b < 38; b++){
         x = rand() % 16;
         y = rand() % 16;
         if (mapa[x][y] == 0){
@@ -47,7 +51,8 @@ int main () {
             b--;
         }
     }
-     for(int b = 0; b < 38; b++){
+
+    for(int b = 0; b < 38; b++){
         x = rand() % 16;
         y = rand() % 16;
         if (mapa[x][y] == 0){
@@ -57,7 +62,8 @@ int main () {
             b--;
         }
     }
- for(int b = 0; b < 38; b++){
+
+    for(int b = 0; b < 38; b++){
         x = rand() % 16;
         y = rand() % 16;
         if (mapa[x][y] == 0){
@@ -67,7 +73,8 @@ int main () {
             b--;
         }
     }
-     for(int b = 0; b < 38; b++){
+
+    for(int b = 0; b < 38; b++){
         x = rand() % 16;
         y = rand() % 16;
         if (mapa[x][y] == 0){
@@ -77,7 +84,8 @@ int main () {
             b--;
         }
     }
-     for(int b = 0; b < 16; b++){
+
+    for(int b = 0; b < 16; b++){
         x = rand() % 16;
         y = rand() % 16;
         if (mapa[x][y] == 0){
@@ -87,6 +95,7 @@ int main () {
             b--;
         }
     }
+
     for (int i = 0; i < 16; i++){
         for (int l = 0; l < 16; l++){
             if (mapa[i][l] == 1){
@@ -101,15 +110,15 @@ int main () {
             else if (mapa[i][l]==4){
                 cout << " a ";
             }
-             else if (mapa[i][l]==5) {
+            else if (mapa[i][l]==5) {
                 cout << " t ";
-             }
-              else if (mapa[i][l]==6) {
+            }
+            else if (mapa[i][l]==6) {
                 cout << " # ";
-              }
-             else {
+            }
+            else {
                 cout << " . ";
-             }
+            }
         }
         cout << endl;
     }
@@ -138,6 +147,7 @@ int main () {
     else {
         cout << "Objetivo indefinido!" << endl;
     }
+
     cout << "\nINVENTARIO: ";
     cout << "Graveto: " << gravetos << endl;
     cout << "Pedras:"  << pedras << endl;
@@ -145,12 +155,7 @@ int main () {
     cout << "Animais: " << animais << endl;
     cout << "Arvores: " << arvores << endl;
     
-    mapa[0][0] = '.';
-    mapa[xJogador][yJogador] = 'J'; 
-
-    char movimento;
-    char coletar;
-    
+    char itemEmbaixo = mapa[0][0];
     mapa[xJogador][yJogador] = 'J'; 
 
     while (gravetos < metagravetos || pedras < metapedras || frutas < metafrutas || animais < metaanimais || arvores < metaarvores) {
@@ -158,6 +163,7 @@ int main () {
         cout << "\nINVENTARIO: " << endl;
         cout << "Graveto: " << gravetos << " | Pedras: " << pedras << " | Frutas: " << frutas << " | Animais: " << animais << " | Arvores: " << arvores << endl;
         cout << "--------------------------------------------------\n";
+
         for (int i = 0; i < 16; i++){
             for (int l = 0; l < 16; l++){
                 if (mapa[i][l] == 'J') { 
@@ -175,27 +181,41 @@ int main () {
                 else if (mapa[i][l]==4){
                     cout << " a ";
                 }
-                 else if (mapa[i][l]==5) {
+                else if (mapa[i][l]==5) {
                     cout << " t ";
-                 }
-                  else if (mapa[i][l]==6) {
+                }
+                else if (mapa[i][l]==6) {
                     cout << " # ";
-                  }
-                 else {
+                }
+                else {
                     cout << " . ";
-                 }
+                }
             }
             cout << endl;
         }
 
-        cout << "\nPara onde quer ir? (w: cima, s: baixo, a: esquerda, d: direita): ";
-        cin >> movimento;
-        
+        cout << "\nComando (w,a,s,d para andar / digite 'c' ou ESPACO para coletar): ";
+        string comando;
+        getline(cin >> ws, comando);
 
+        if (comando == "c" || comando == "C" || comando == " " || comando == "") {
+            if (itemEmbaixo >= 1 && itemEmbaixo <= 5) {
+                if (itemEmbaixo == 1) { gravetos++; cout << "\n[+] Coletou Graveto!"; }
+                if (itemEmbaixo == 2) { pedras++;   cout << "\n[+] Coletou Pedra!"; }
+                if (itemEmbaixo == 3) { frutas++;   cout << "\n[+] Coletou Fruta!"; }
+                if (itemEmbaixo == 4) { animais++;  cout << "\n[+] Coletou Animal!"; }
+                if (itemEmbaixo == 5) { arvores++;  cout << "\n[+] Coletou Arvore!"; }
+                
+                itemEmbaixo = 0; 
+            } else {
+                cout << "\nNao ha nada para coletar aqui!" << endl;
+            }
+            continue;
+        }
 
+        char movimento = comando[0];
         int proximoX = xJogador;
         int proximoY = yJogador;
-
 
         if (movimento == 'w' || movimento == 'W') proximoX--;
         if (movimento == 's' || movimento == 'S') proximoX++;
@@ -204,22 +224,16 @@ int main () {
 
         if (proximoX >= 0 && proximoX < 16 && proximoY >= 0 && proximoY < 16) {
             
-
             if (mapa[proximoX][proximoY] == 6) {
                 cout << "\nObstaculo! nao pode ultrapassar" << endl;
-
             } 
             else {
-                mapa[xJogador][yJogador] = 0; 
+                mapa[xJogador][yJogador] = itemEmbaixo; 
 
                 xJogador = proximoX;
                 yJogador = proximoY;
 
-                if (mapa[xJogador][yJogador] == 1) gravetos++;
-                if (mapa[xJogador][yJogador] == 2) pedras++;
-                if (mapa[xJogador][yJogador] == 3) frutas++;
-                if (mapa[xJogador][yJogador] == 4) animais++;
-                if (mapa[xJogador][yJogador] == 5) arvores++;
+                itemEmbaixo = mapa[xJogador][yJogador];
 
                 mapa[xJogador][yJogador] = 'J';
             }
@@ -231,4 +245,3 @@ int main () {
     cout << "\nParabens! Voce atingiu todos os seus objetivos e venceu o jogo!" << endl;
     return 0;
 }
-
