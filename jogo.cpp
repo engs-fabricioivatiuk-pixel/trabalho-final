@@ -122,7 +122,6 @@ int main () {
         }
         cout << endl;
     }
-    
     cout << "\nqual o seu objetivo ?" << endl;
     cout <<" 1- Coletar 4 gravetos e 2 pedras" << endl;
     cout <<" 2- coletar 1 fruta e 3 animais" << endl; 
@@ -194,7 +193,7 @@ int main () {
             cout << endl;
         }
 
-        cout << "\nComando (w,a,s,d para andar / digite 'c' ou ESPACO para coletar): ";
+        cout << "\nComando (w,a,s,d para andar / digite 'c' ): ";
         string comando;
         getline(cin >> ws, comando);
 
@@ -243,5 +242,6 @@ int main () {
     } 
 
     cout << "\nParabens! Voce atingiu todos os seus objetivos e venceu o jogo!" << endl;
+ 
     return 0;
 }
